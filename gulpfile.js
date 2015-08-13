@@ -12,6 +12,7 @@ var
   rename =      require('gulp-rename'),
   shell =       require('gulp-shell'),
   sourcemaps =  require('gulp-sourcemaps'),
+  source =      require('vinyl-source-stream'),
   uglify =      require('gulp-uglify'),
   gutil =       require('gulp-util'),
   watch =       require('gulp-watch'),
