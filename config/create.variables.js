@@ -1,8 +1,7 @@
-var through = require('through2');
-var gutil = require('gulp-util');
+import through from 'through2';
+import gutil from 'gulp-util';
 
-
-module.exports = function (outname) {
+export default function (outname) {
   var paths = '';  // where we will push the path names with the @import
 
   var write = function (file, enc, cb){

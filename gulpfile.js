@@ -2,17 +2,12 @@ var
   _ =           require('lodash'),
   gulp =        require('gulp'),
   pkg =         require('./package.json'),
-  changed =     require('gulp-changed'),
   concat =      require('gulp-concat'),
-  filesize =    require('gulp-filesize'),
-  gulpif =      require('gulp-if'),
   jade =        require('gulp-jade'),
-  jshint =      require('gulp-jshint'),
   less =        require('gulp-less'),
   livereload =  require('gulp-livereload'),
   cssmin =      require('gulp-minify-css'),
   nodemon =     require('gulp-nodemon'),
-  notify =      require('gulp-notify'),
   plumber =     require('gulp-plumber'),
   rename =      require('gulp-rename'),
   shell =       require('gulp-shell'),
@@ -21,12 +16,10 @@ var
   gutil =       require('gulp-util'),
   watch =       require('gulp-watch'),
   buffer =      require('vinyl-buffer'),
-  source =      require('vinyl-source-stream'),
   watchify =    require('watchify'),
   browserify =  require('browserify'),
   del =         require('del'),
-  path =        require('path'),
-  reactify =    require('reactify'),
+  babelify =    require('babelify'),
   browserifyShim = require('browserify-shim'),
   merge =       require('merge-stream'),
   karma =       require('karma').server;
@@ -123,7 +116,7 @@ gulp.task('copy:assets', ['clean:assets'], function () {
   var img = gulp.src(client('/img/**'))
     .pipe(gulp.dest(dist('/img')));
 
-  var sem = gulp.src(client('/lib/semantic/themes/**'))
+  gulp.src(client('/lib/semantic/themes/**'))
     .pipe(gulp.dest(dist('/css')));
 
   return merge(fa, img);
@@ -170,7 +163,7 @@ gulp.task('watchify', function() {
       _.extend(watchify.args, {
         entries: ['./client/src/main.jsx'],
         extensions: ['.jsx'],
-        transform: [reactify, browserifyShim]
+        transform: [babelify, browserifyShim]
       })
     )
   );
